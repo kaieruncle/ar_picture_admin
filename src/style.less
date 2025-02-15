@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'PingFangSC-Light', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+span {
+  font-size: 14px;
+}
+
+img {
+  vertical-align: bottom;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+th {
+  padding: 4px 16px !important;
+  font-size: 14px !important;
+  font-weight: 200 !important;
+}
+
+.search_form {
+  margin-top: 20px;
+
+  :deep(.ant-form-item) {
+    width: 100%;
+  }
+
+  :deep(.ant-picker) {
+    width: 100%;
+  }
+
+  button {
+    margin-bottom: 24px;
+
+    &:first-child {
+      margin-right: 20px;
+    }
+  }
+}
+
+.table_operation {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  >span {
+    display: block;
+    cursor: pointer;
+    color: #999999;
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    &:hover {
+      color: #fc9202;
+    }
+  }
+}
+
+.table_title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  >span {
+    &:last-child {
+      cursor: pointer;
+      color: #999999;
+
+      &:hover {
+        color: #fc9202;
+      }
+    }
+  }
+}
+
+.table_btn_box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  >button {
+    margin-right: 20px;
+  }
+}
+
+.table_hight_light {
+  cursor: pointer;
+  color: #fc9202;
+  text-decoration: underline;
+  letter-spacing: 2px;
+}
+
+.form_item_full {
+  width: 100%
+}
