@@ -10,8 +10,10 @@ export const COLUMNS = [
         dataIndex: 'user.nickname',
         align: 'center',
         width: 100,
-        customRender: ({record}) => {
-            return record.user.nickname;
+        customRender: ({ record }) => {
+            const { user } = record || {}
+            const { nickname } = user || {}
+            return nickname;
         },
     },
     {
@@ -37,10 +39,4 @@ export const COLUMNS = [
         dataIndex: 'status',
         align: 'center',
         width: 100,
-    },
-    {
-        title: '创建时间',
-        dataIndex: 'updated_at',
-        align: 'center',
-        width: 160,
     }]

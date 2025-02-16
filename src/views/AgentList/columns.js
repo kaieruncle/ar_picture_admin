@@ -118,10 +118,4 @@ export const EXTRACLLISTCOLUMNS = [{
     align: 'center',
     width: 120,
     ellipsis: true
-}, {
-    title: '创建时间',
-    dataIndex: 'updated_at',
-    align: 'center',
-    width: 100,
-    ellipsis: true
 }]

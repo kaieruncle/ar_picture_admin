@@ -45,9 +45,4 @@ export const COLUMNS = [{
         const {nickname} = user || {}
         return nickname;
     },
-},{
-    title: '创建时间',
-    dataIndex: 'created_at',
-    align: 'center',
-    width: 80,
 }]

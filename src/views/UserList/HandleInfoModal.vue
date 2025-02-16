@@ -41,7 +41,7 @@ const beforeUpload = file => {
   return false;
 };
 /**
- * 获取跟进证明上传结果
+ * 获取头像
  */
 const getFile = async ({ file, fileList }) => {
   const { status } = file || {}

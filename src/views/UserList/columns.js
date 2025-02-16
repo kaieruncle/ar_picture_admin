@@ -64,9 +64,4 @@ export const COLUMNS = [{
             ellipsis: true
         }
     ]
-}, {
-    title: '注册时间',
-    dataIndex: 'created_at',
-    align: 'center',
-    width: 160
 }]

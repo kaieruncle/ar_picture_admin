@@ -34,9 +34,4 @@ export const COLUMNS = [{
     dataIndex: 'remark',
     align: 'center',
     width: 160
-}, {
-    title: '创建时间',
-    dataIndex: 'created_at',
-    align: 'center',
-    width: 160
 }]

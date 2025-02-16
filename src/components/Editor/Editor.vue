@@ -1,14 +1,14 @@
 <template>
   <div class="editor_container">
-    <Toolbar :defaultConfig="toolbarConfig" :editor="editorRef" mode="default"/>
-    <Editor v-model="content" :defaultConfig="editorConfig" mode="default" @onCreated="handleCreated"/>
+    <Toolbar :defaultConfig="toolbarConfig" :editor="editorRef" mode="default" />
+    <Editor v-model="content" :defaultConfig="editorConfig" mode="default" @onCreated="handleCreated" />
   </div>
 </template>
 <script setup>
-import {onBeforeUnmount, ref, shallowRef} from 'vue'
+import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import '@wangeditor/editor/dist/css/style.css'
-import {Editor, Toolbar} from '@wangeditor/editor-for-vue'
-import {postfileupload} from '@/request/commonApi';
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+import { postfileupload } from '@/request/commonApi';
 
 const content = ref('')
 // 编辑器实例，必须用 shallowRef
@@ -25,8 +25,7 @@ const editorConfig = {
       async customUpload(file, insertFn) {
         const formData = new FormData()
         formData.append('file', file)
-        const {data} = await postfileupload(formData)
-        const {url} = data || {}
+        const { url } = await postfileupload(formData)
         if (!url) return
         insertFn(url, '', '')
       }
