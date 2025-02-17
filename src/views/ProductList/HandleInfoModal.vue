@@ -2,22 +2,11 @@
     <a-modal v-model:open="open" :title="`${formState.id ? '编辑' : '新增'}商品`" :closable="false" :width="800"
         destroyOnClose @ok="submitForm">
         <a-form layout="vertical" ref="formRef" :model="formState">
-            <a-row wrap :gutter="{ xs: 8, sm: 16, md: 24 }">
-                <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="title" label="商品名称">
-                        <a-input v-model:value="formState.title" placeholder="请输入商品名称" />
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="category_id" label="商品分类">
-                        <a-select v-model:value="formState.category_id" :options="categoryList"
-                            :field-names="{ label: 'name', value: 'id' }" placeholder="请选择文章分类"></a-select>
-                    </a-form-item>
-                </a-col>
-            </a-row>
-
-            <a-form-item required name="description" label="商品描述">
-                <a-textarea v-model:value="formState.description" placeholder="请输入商品描述" />
+            <a-form-item required name="title" label="商品名称">
+                <a-input v-model:value="formState.title" placeholder="请输入商品名称" />
+            </a-form-item>
+            <a-form-item required name="aspect_ratio" label="相框支持的比例">
+                <a-input v-model:value="formState.aspect_ratio" placeholder="请输入相框支持的比例" />
             </a-form-item>
             <a-row wrap :gutter="{ xs: 8, sm: 16, md: 24 }">
                 <a-col :xs="24" :sm="16" :md="12">
@@ -49,7 +38,7 @@ import { useRoute } from "vue-router";
 import { message } from 'ant-design-vue';
 import { DeleteOutlined, UploadOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { postfileupload } from '@/request/commonApi';
-import { postproduct, putproduct, getproductcategorylist } from './api';
+import { postproduct, putproduct } from './api';
 const emit = defineEmits(['success'])
 const categoryList = ref([])
 const route = useRoute()

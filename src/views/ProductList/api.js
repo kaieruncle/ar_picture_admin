@@ -1,14 +1,7 @@
 import { instance } from "@/request/request";
 export const apiMap = {
   product: '/product',
-  productlist: '/product/list',
-  productcategorylist: '/product-category/list',
-}
-/**
- * 获取分类列表
- */
-export const getproductcategorylist = (payload) => {
-  return instance.get(apiMap.productcategorylist, { payload })
+  productlist: '/product/list'
 }
 /**
  * 获取列表

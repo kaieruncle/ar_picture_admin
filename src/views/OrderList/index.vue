@@ -30,9 +30,9 @@
       <template #bodyCell="{ column, record }">
         <a-tag v-if="column.dataIndex === 'status'" :color="statusColorMap[record.status]">{{ statusMap[record.status]
           }}</a-tag>
-        <a-image v-if="column.dataIndex === 'picture.picture_url'" :width="60" :height="60"
-          :src="record.picture?.picture_url"></a-image>
+        <a-image v-if="column.dataIndex === 'picture_url'" :width="60" :height="60" :src="record.picture_url"></a-image>
         <div v-if="column.dataIndex === 'operation'" class="table_operation">
+          <span @click="wakeUpRegenQrcodeConfirm(record)">刷新入口码</span>
           <span @click="handleDelete(record)">删除</span>
         </div>
       </template>
@@ -47,7 +47,7 @@ import { message, Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { COLUMNS } from './columns';
 import { STATUSMAP, STATUSCOLORMAP } from './const';
-import { getpaylist, deletepay } from './api';
+import { getpaylist, deletepay, putpay } from './api';
 import HandleInfoModal from './HandleInfoModal.vue';
 
 
@@ -88,12 +88,21 @@ const pagination = reactive({
 const onSelectChange = (val) => {
   selectedRowKeys.value = val;
 };
-
 /**
- * 唤醒新增/修改项目弹窗
+ * 唤醒重新生成二维码确认弹窗
 */
-const wakeUpHandleInfoModal = record => {
-  handleInfoModalRef.value.getEchoInfo(record)
+const wakeUpRegenQrcodeConfirm = record => {
+  const { id } = record || {}
+  Modal.confirm({
+    title: '提示',
+    icon: () => createVNode(ExclamationCircleOutlined),
+    content: `确认刷新【${title}】的入口码？`,
+    onOk: async () => {
+      await putpay(id);
+      selectedRowKeys.value = [];
+      getList();
+    }
+  });
 }
 /**
  * 获取列表

@@ -22,7 +22,7 @@
       <a-button type="primary" @click="wakeUpHandleInfoModal">新建商品</a-button>
       <!-- <a-button type="primary" danger v-if="selectedRowKeys.length > 0" @click="handleBatchDelete">批量删除</a-button> -->
     </div>
-    <a-table :columns="columns" :data-source="list" :loading="loading" :pagination="pagination" :scroll="{ x: 1200 }"
+    <a-table :columns="columns" :data-source="list" :loading="loading" :scroll="{ x: 1200 }"
       :row-selection="{ fixed: 'left', selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
       :rowKey="(record) => record.id">
       <template #headerCell="{ column }">
@@ -70,23 +70,6 @@ const formState = ref({})
 const columns = ref(COLUMNS)
 const list = ref([])
 const selectedRowKeys = ref([])
-const pagination = reactive({
-  current: 1,
-  pageSize: 10,
-  showSizeChanger: true,
-  showQuickJumper: false,
-  total: 0,
-  pageSizeOptions: ['10', '20', '50'],
-  showTotal: (total) => `共 ${total} 条`,
-  onShowSizeChange: (current, pageSize) => {
-    pagination.pageSize = pageSize;
-    pagination.current = 1;
-  },
-  onChange: (current) => {
-    pagination.current = current;
-    getList();
-  },
-});
 /**
  * 批量选中
  */
@@ -100,16 +83,11 @@ const onSelectChange = (val) => {
 const getList = async () => {
   loading.value = true
   const { title, status } = formState.value || {}
-  const { pageSize, current: pageNum } = pagination || {}
-  const payload = {
-    pageSize,
-    pageNum
-  }
+  const payload = {}
   if (title) payload.title = title
   if (status) payload.status = status
-  const { list: newList, count } = await getproductlist(payload)
+  const newList = await getproductlist(payload)
   list.value = newList || []
-  pagination.total = count
   loading.value = false
 }
 /**
@@ -134,8 +112,6 @@ const getStatusOptionList = async () => {
  * 筛选
  */
 const search = () => {
-  pagination.current = 1
-  pagination.total = 0
   getList()
 }
 /**

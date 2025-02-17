@@ -2,7 +2,7 @@ export const COLUMNS = [{
     title: '操作',
     dataIndex: 'operation',
     align: 'center',
-    width: 60,
+    width: 120,
     fixed: 'left',
 },
 {
@@ -10,39 +10,39 @@ export const COLUMNS = [{
     dataIndex: 'out_trade_no',
     align: 'center',
     width: 150,
-},{
+}, {
     title: '状态',
     dataIndex: 'status',
     align: 'center',
     width: 80
-},{
+}, {
     title: '订单金额',
     dataIndex: 'total_fee',
     align: 'center',
     width: 80
-},{
-    title: '作品标题',
-    dataIndex: 'picture.title',
-    align: 'center',
-    width: 120,
-    customRender: ({record}) => {
-        const {picture} = record || {}
-        const {title} = picture || {}
-        return title;
-    },
-},{
-    title: '作品图片',
-    dataIndex: 'picture.picture_url',
+}, {
+    title: '照片',
+    dataIndex: 'picture_url',
     align: 'center',
     width: 80
-},{
-    title: '所属用户',
+}, {
+    title: '相框',
+    dataIndex: 'product.title',
+    align: 'center',
+    width: 80,
+    customRender: ({ record }) => {
+        const { product } = record || {}
+        const { title } = product || {}
+        return title;
+    },
+}, {
+    title: '用户',
     dataIndex: 'user.nickname',
     align: 'center',
     width: 80,
-    customRender: ({record}) => {
-        const {user} = record || {}
-        const {nickname} = user || {}
+    customRender: ({ record }) => {
+        const { user } = record || {}
+        const { nickname } = user || {}
         return nickname;
     },
 }]
