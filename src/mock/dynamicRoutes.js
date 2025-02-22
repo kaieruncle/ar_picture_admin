@@ -100,18 +100,6 @@ export const mockDynamicRoutes = [{
         title: "订单列表",
         keepAlive: false
       }
-    },
-    {
-      name: "RefundApply",
-      path: "refundapply",
-      component: "RefundApply/index",
-      hidden: false,
-      layout: "MainLayout",
-      icon: "menu_item_work_line",
-      meta: {
-        title: "退款申请",
-        keepAlive: false
-      }
     }]
 }, {
   layout: 'MainLayout',

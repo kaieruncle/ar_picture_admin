@@ -3,6 +3,7 @@ import { instance } from "@/request/request";
 export const apiMap = {
     pay: '/pay',
     paylist: '/pay/list',
+    payship: '/pay/ship',
     payqrcode: '/pay/qrcode'
 }
 /**
@@ -14,8 +15,14 @@ export const getpaylist = (payload) => {
 /**
  * 刷新入口码
 */
-export const putpay = (payload) => {
-    return instance.put(`${apiMap.pay}/${payload}`)
+export const putpayqrcode = (payload) => {
+    return instance.put(`${apiMap.payqrcode}/${payload}`)
+}
+/**
+ * 发货
+*/
+export const putpayship = (payload) => {
+    return instance.put(apiMap.payship, payload)
 }
 
 /**

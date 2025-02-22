@@ -30,14 +30,16 @@
       <template #bodyCell="{ column, record }">
         <a-tag v-if="column.dataIndex === 'status'" :color="statusColorMap[record.status]">{{ statusMap[record.status]
           }}</a-tag>
-        <a-image v-if="column.dataIndex === 'picture_url'" :width="60" :height="60" :src="record.picture_url"></a-image>
+        <a-image v-if="column.dataIndex === 'photo_url'" :width="60" :height="60" :src="record.photo_url"></a-image>
+        <a-image v-if="column.dataIndex === 'ew_code_url'" :width="60" :height="60" :src="record.ew_code_url"></a-image>
         <div v-if="column.dataIndex === 'operation'" class="table_operation">
-          <span @click="wakeUpRegenQrcodeConfirm(record)">刷新入口码</span>
+          <span @click="wakeUpRegenQrcodeConfirm(record)" v-if="record.status !== 'pending'">重置码</span>
+          <span v-if="record.status === 'paid'" @click="wakeUpSendModal(record)">发货</span>
           <span @click="handleDelete(record)">删除</span>
         </div>
       </template>
     </a-table>
-    <HandleInfoModal ref="handleInfoModalRef" @success="getList" />
+    <SendModal ref="sendModalRef" @success="getList" />
   </div>
 </template>
 <script setup>
@@ -47,8 +49,8 @@ import { message, Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { COLUMNS } from './columns';
 import { STATUSMAP, STATUSCOLORMAP } from './const';
-import { getpaylist, deletepay, putpay } from './api';
-import HandleInfoModal from './HandleInfoModal.vue';
+import { getpaylist, deletepay, putpayqrcode } from './api';
+import SendModal from './SendModal.vue';
 
 
 onMounted(() => {
@@ -56,6 +58,7 @@ onMounted(() => {
 })
 const route = useRoute()
 const router = useRouter()
+const sendModalRef = ref()
 const statusMap = ref(STATUSMAP)
 const statusColorMap = ref(STATUSCOLORMAP)
 const handleInfoModalRef = ref()
@@ -96,13 +99,19 @@ const wakeUpRegenQrcodeConfirm = record => {
   Modal.confirm({
     title: '提示',
     icon: () => createVNode(ExclamationCircleOutlined),
-    content: `确认刷新【${title}】的入口码？`,
+    content: `确认重置改的入口码？`,
     onOk: async () => {
-      await putpay(id);
+      await putpayqrcode(id);
       selectedRowKeys.value = [];
       getList();
     }
   });
+}
+/**
+ * 唤醒发货弹窗
+ */
+const wakeUpSendModal = (record) => {
+  sendModalRef.value.getEchoInfo(record)
 }
 /**
  * 获取列表

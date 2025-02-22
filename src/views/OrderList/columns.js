@@ -2,19 +2,19 @@ export const COLUMNS = [{
     title: '操作',
     dataIndex: 'operation',
     align: 'center',
-    width: 120,
+    width: 100,
     fixed: 'left',
 },
 {
     title: '订单号',
     dataIndex: 'out_trade_no',
     align: 'center',
-    width: 150,
+    width: 120,
 }, {
     title: '状态',
     dataIndex: 'status',
     align: 'center',
-    width: 80
+    width: 60
 }, {
     title: '订单金额',
     dataIndex: 'total_fee',
@@ -22,14 +22,19 @@ export const COLUMNS = [{
     width: 80
 }, {
     title: '照片',
-    dataIndex: 'picture_url',
+    dataIndex: 'photo_url',
+    align: 'center',
+    width: 80
+}, {
+    title: '入口码',
+    dataIndex: 'ew_code_url',
     align: 'center',
     width: 80
 }, {
     title: '相框',
     dataIndex: 'product.title',
     align: 'center',
-    width: 80,
+    width: 120,
     customRender: ({ record }) => {
         const { product } = record || {}
         const { title } = product || {}
@@ -39,7 +44,7 @@ export const COLUMNS = [{
     title: '用户',
     dataIndex: 'user.nickname',
     align: 'center',
-    width: 80,
+    width: 100,
     customRender: ({ record }) => {
         const { user } = record || {}
         const { nickname } = user || {}

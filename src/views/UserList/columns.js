@@ -34,16 +34,4 @@ export const COLUMNS = [{
     align: 'center',
     width: 80,
     ellipsis: true
-}, {
-    title: '退款中',
-    dataIndex: 'refunding_orders',
-    align: 'center',
-    width: 80,
-    ellipsis: true
-}, {
-    title: '已退款',
-    dataIndex: 'refunded_orders',
-    align: 'center',
-    width: 80,
-    ellipsis: true
 }]
