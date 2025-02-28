@@ -45,8 +45,8 @@ export default defineConfig({
         https: false,
         proxy: {
             '/api': {
-                target: 'https://album.jing-shi.net/api',
-                // target: 'http://192.168.1.7:8001',
+                // target: 'https://album.jing-shi.net/api',
+                target: 'http://192.168.1.7:8001/api',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '')
             }

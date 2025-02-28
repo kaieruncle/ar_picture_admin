@@ -39,40 +39,6 @@ export const mockDynamicRoutes = [{
   hidden: false,
   meta: {
     keepAlive: false,
-    title: "文章管理"
-  },
-  component: null,
-  children: [
-    {
-      name: "ArticleCategoryList",
-      path: "articlecategorylist",
-      component: "ArticleCategoryList/index",
-      hidden: false,
-      layout: "MainLayout",
-      icon: "menu_item_work_line",
-      meta: {
-        title: "文章分类",
-        keepAlive: false
-      }
-    }, {
-      name: "ArticleList",
-      path: "articlelist",
-      component: "ArticleList/index",
-      hidden: false,
-      layout: "MainLayout",
-      icon: "menu_item_work_line",
-      meta: {
-        title: "文章管理",
-        keepAlive: false
-      }
-    }]
-}, {
-  layout: 'MainLayout',
-  path: null,
-  name: null,
-  hidden: false,
-  meta: {
-    keepAlive: false,
     title: "财务管理"
   },
   component: null,
