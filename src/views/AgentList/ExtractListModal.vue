@@ -19,10 +19,11 @@
     </a-modal>
 </template>
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref,createVNode } from 'vue';
+import { Modal,message } from 'ant-design-vue';
+import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { EXTRACLLISTCOLUMNS } from './columns.js';
 import { getwithdrawlist, deletewithdraw } from "./api.js";
-
 const loading = ref(false)
 const info = ref({})
 const open = ref(false);
@@ -72,7 +73,22 @@ const getList = async () => {
     pagination.total = count
     loading.value = false
 }
-
+/**
+ * 删除提现记录
+ */
+const handleDelete = (record) => {
+  const { id } = record || {}
+  Modal.confirm({
+    title: '提示',
+    icon: () => createVNode(ExclamationCircleOutlined),
+    content: '确认删除此提现记录吗？',
+    onOk: async () => {
+      await deletewithdraw(id);
+      message.success(`记录删除成功`)
+      getList();
+    }
+  });
+}
 /**
  * 关闭
  */

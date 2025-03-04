@@ -5,21 +5,6 @@
             <a-form-item required name="title" label="商品名称">
                 <a-input v-model:value="formState.title" placeholder="请输入商品名称" />
             </a-form-item>
-
-            <a-row wrap :gutter="{ xs: 8, sm: 16, md: 24 }">
-                <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="image_width" label="照片宽度">
-                        <a-input-number class="form_item_full" v-model:value="formState.image_width"
-                            placeholder="请输入照片宽度" />
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="image_height" label="照片高度">
-                        <a-input-number class="form_item_full" v-model:value="formState.image_height"
-                            placeholder="请输入照片高度" />
-                    </a-form-item>
-                </a-col>
-            </a-row>
             <a-row wrap :gutter="{ xs: 8, sm: 16, md: 24 }">
                 <a-col :xs="24" :sm="16" :md="12">
                     <a-form-item required name="price" label="价格">

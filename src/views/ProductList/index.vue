@@ -8,11 +8,6 @@
           </a-form-item>
         </a-col>
         <a-col :md="6" :sm="16" :xs="24">
-          <a-form-item label="类型">
-            <a-select v-model:value="formState.status" :options="statusOptionList" placeholder="请选择类型"></a-select>
-          </a-form-item>
-        </a-col>
-        <a-col :md="6" :sm="16" :xs="24">
           <a-button type="primary" @click="search"> 查询</a-button>
           <a-button @click="reset"> 重置</a-button>
         </a-col>
@@ -52,19 +47,14 @@ import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { useRouter } from 'vue-router';
 import { COLUMNS } from './columns';
 import { getdictoptions } from '@/request/commonApi'
-import { STATUSMAP, STATUSCOLORMAP } from './const';
 import { getproductlist } from './api';
 import HandleInfoModal from './HandleInfoModal.vue';
 
 onMounted(() => {
-  getStatusOptionList()
   getList()
 })
 const handleInfoModalRef = ref()
 const router = useRouter()
-const statusOptionList = ref([])
-const statusMap = ref(STATUSMAP)
-const statusColorMap = ref(STATUSCOLORMAP)
 const loading = ref(false)
 const formState = ref({})
 const columns = ref(COLUMNS)
@@ -82,10 +72,9 @@ const onSelectChange = (val) => {
  */
 const getList = async () => {
   loading.value = true
-  const { title, status } = formState.value || {}
+  const { title } = formState.value || {}
   const payload = {}
   if (title) payload.title = title
-  if (status) payload.status = status
   const newList = await getproductlist(payload)
   list.value = newList || []
   loading.value = false
@@ -100,13 +89,6 @@ const toogleIsStarred = async (record) => {
     is_starred
   })
   message.success(`${is_starred ? '推荐' : '取消推荐'}文章${title}成功`)
-}
-/**
- * 获取状态列表
- */
-const getStatusOptionList = async () => {
-  const data = await getdictoptions('content_type')
-  statusOptionList.value = data || []
 }
 /**
  * 筛选

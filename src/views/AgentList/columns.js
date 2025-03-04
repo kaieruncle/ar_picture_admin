@@ -71,7 +71,7 @@ export const COLUMNS = [{
     title: '成交订单数',
     dataIndex: 'order_count',
     align: 'center',
-    width: 100,
+    width: 120,
     ellipsis: true
 }]
 export const USERLISTCOLUMNS = [ {
@@ -89,7 +89,7 @@ export const USERLISTCOLUMNS = [ {
 },
 {
     title: '消费金额',
-    dataIndex: 'order_amount',
+    dataIndex: 'total_amount',
     align: 'center',
     width: 100,
     ellipsis: true
