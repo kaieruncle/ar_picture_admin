@@ -2,7 +2,7 @@ import { instance } from "@/request/request";
 
 export const apiMap = {
     agentusers: '/agent/users',
-    agentlist: '/agent/list',
+    withdrawlist: '/withdraw/list',
     agentwithdrawlist: '/agent/withdrawlist',
     agentapprove: '/agent/approve',
     agentcommission: '/agent/commission'
@@ -10,8 +10,8 @@ export const apiMap = {
 /**
  * 获取列表
  */
-export const getagentlist = (payload) => {
-    return instance.get(apiMap.agentlist, { payload });
+export const getwithdrawlist = (payload) => {
+    return instance.get(apiMap.withdrawlist, { payload });
 }
 /**
  * 获取客户列表

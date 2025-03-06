@@ -11,6 +11,8 @@ export const apiMap = {
     dictoptions: '/dict/options',
     // 文件上传
     fileupload: '/file/upload',
+    // 修改密码
+    userpassword: '/user/password'
 }
 
 
@@ -25,6 +27,12 @@ export const postfileupload = (payload) => {
  */
 export const postauthadminlogin = (payload) => {
     return instance.post(apiMap.authadminlogin, payload);
+}
+/**
+ * 修改密码
+ */
+export const putuserpassword = (payload) => {
+    return instance.put(apiMap.userpassword, payload);
 }
 /**
  * 获取用户信息

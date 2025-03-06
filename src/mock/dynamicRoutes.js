@@ -54,6 +54,17 @@ export const mockDynamicRoutes = [{
         title: "代理列表",
         keepAlive: false
       }
+    },{
+      name: "WithdrawList",
+      path: "withdrawlist",
+      component: "WithdrawList/index",
+      hidden: false,
+      layout: "MainLayout",
+      icon: "menu_item_work_line",
+      meta: {
+        title: "提现列表",
+        keepAlive: false
+      }
     },
     {
       name: "OrderList",

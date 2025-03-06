@@ -6,20 +6,32 @@
         </div>
         <template #overlay>
             <a-menu>
+                <a-menu-item @click="wakeUpEditUserPasswordModal">
+                    <span>修改密码</span>
+                </a-menu-item>
                 <a-menu-item @click="wakeUpLogoutConfirm">
                     <span>退出登录</span>
                 </a-menu-item>
             </a-menu>
         </template>
     </a-dropdown>
+    <EditUserPasswordModal ref="editUserPasswordModalRef" />
 </template>
 <script setup>
 import { computed, createVNode, ref, onMounted } from 'vue';
 import { Modal } from "ant-design-vue";
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { useUserStore } from "@/store/index";
+import EditUserPasswordModal from './EditUserPasswordModal.vue';
+const editUserPasswordModalRef = ref()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo)
+/**
+ * 唤醒密码修改框
+ */
+const wakeUpEditUserPasswordModal = () => {
+    editUserPasswordModalRef.value.open = true
+}
 /**
  * 唤醒登出确认框
  */

@@ -1,5 +1,5 @@
 <template>
-  <div class="agent_list_container">
+  <div class="withdraw_list_container">
     <a-form :model="formState" class="search_form">
       <a-row :gutter="{ xs: 6, sm: 16, md: 24 }" wrap>
         <a-col :md="6" :sm="16" :xs="24">
@@ -58,7 +58,7 @@ import { Modal, message } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { COLUMNS } from './columns';
 import { STATUSMAP, STATUSCOLORMAP } from './const';
-import { getagentlist, putagentcommission } from './api';
+import { getwithdrawlist, putagentcommission } from './api';
 import UserListModal from './UserListModal.vue';
 import HandleApproveModal from './HandleApproveModal.vue';
 
@@ -134,7 +134,7 @@ const getList = async () => {
     pageNum
   }
   if (nickname) payload.nickname = nickname
-  const { list: newList, count } = await getagentlist(payload)
+  const { list: newList, count } = await getwithdrawlist(payload)
   list.value = newList || []
   pagination.total = count
   loading.value = false
@@ -162,7 +162,7 @@ const reset = () => {
 }
 </script>
 <style lang="less" scoped>
-.note_manager_container {
+.withdraw_list_container {
   padding: 0 20px;
 
   >button {
