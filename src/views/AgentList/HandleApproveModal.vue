@@ -5,7 +5,8 @@
                 <a-switch v-model:checked="formState.approved" checked-children="通过" un-checked-children="拒绝" />
             </a-form-item>
             <a-form-item required name="commission_rate" label="分成比例" v-if="formState.approved">
-                <a-input-number class="form_item_full" v-model:value="formState.commission_rate" placeholder="请填写分成比例" />
+                <a-input-number class="form_item_full" v-model:value="formState.commission_rate"
+                    placeholder="请填写分成比例" />
             </a-form-item>
             <a-form-item required name="reject_reason" label="拒绝理由" v-if="!formState.approved">
                 <a-textarea v-model:value="formState.reject_reason" placeholder="请填写拒绝理由" />
@@ -25,10 +26,11 @@ const formRef = ref()
  * 获取回显内容
  */
 const getEchoInfo = (record) => {
+    const {approved} = record || {}
+    record.approved = !!approved
     formState.value = JSON.parse(JSON.stringify(record || {}))
     open.value = true
 }
-
 /**
  * 提交表单
  */
@@ -36,7 +38,7 @@ const submitForm = async () => {
     const { approved } = formState.value || {}
     await formRef.value.validate();
     await putagentapprove(formState.value)
-    message.success(`${approved ? '通过' : '拒绝'}代理申请成功`)
+    message.success(`${approved ? '通过' : '拒绝'}代理成功`)
     open.value = false
     emit('success')
 }

@@ -3,9 +3,9 @@ import { instance } from "@/request/request";
 export const apiMap = {
     agentusers: '/agent/users',
     agentlist: '/agent/list',
+    agentinfo: '/agent/info',
     agentwithdrawlist: '/agent/withdrawlist',
-    agentapprove: '/agent/approve',
-    agentcommission: '/agent/commission'
+    agentapprove: '/agent/approve'
 }
 /**
  * 获取列表
@@ -32,9 +32,10 @@ export const putagentapprove = (payload) => {
     return instance.put(apiMap.agentapprove, payload);
 }
 
+
 /**
- * 修改代理点位
+ * 修改代理信息
  */
-export const putagentcommission = (payload) => {
-    return instance.put(apiMap.agentcommission, payload);
+export const putagentinfo = (payload) => {
+    return instance.put(apiMap.agentinfo, payload);
 }

@@ -47,7 +47,7 @@ export const COLUMNS = [{
     ellipsis: true,
     customRender: ({ record }) => {
         const { commission_rate } = record || {}
-        return commission_rate || '-';
+        return `${commission_rate}%` || '-';
     },
 }, {
     title: "钱包",
@@ -65,7 +65,7 @@ export const COLUMNS = [{
         ellipsis: true
     }, {
         title: '已打款',
-        dataIndex: 'withdrawn_amount',
+        dataIndex: 'completed_amount',
         align: 'center',
         width: 100,
         ellipsis: true

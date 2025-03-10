@@ -3,8 +3,8 @@
     <a-form :model="formState" class="search_form">
       <a-row :gutter="{ xs: 6, sm: 16, md: 24 }" wrap>
         <a-col :md="6" :sm="16" :xs="24">
-          <a-form-item label="作品标题/订单号" name="keyword">
-            <a-input v-model:value="formState.keyword" placeholder="请输入作品标题或订单号" />
+          <a-form-item label="订单号" name="keyword">
+            <a-input v-model:value="formState.keyword" placeholder="请输入订单号" />
           </a-form-item>
         </a-col>
         <a-col :md="6" :sm="16" :xs="24">

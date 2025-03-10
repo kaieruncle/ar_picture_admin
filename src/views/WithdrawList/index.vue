@@ -29,44 +29,30 @@
         </a-tooltip>
       </template>
       <template #bodyCell="{ column, record }">
-        <a-image v-if="column.dataIndex === 'qrcode_url' && !!record.qrcode_url" :width="60" :height="60"
-          :src="record.qrcode_url"></a-image>
-        <span v-if="column.dataIndex === 'qrcode_url' && !record.qrcode_url">-</span>
         <a-tag v-if="column.dataIndex === 'status'" :color="statusColorMap[record.status]">{{ statusMap[record.status]
-          }}</a-tag>
-        <a-input v-if="column.dataIndex === 'commission_rate'" v-model:value="record.commission_rate"
-          @blur="editCommissionRate(record)">
-          <template #suffix>
-            <span>%</span>
-          </template>
-        </a-input>
-        <span v-if="column.dataIndex === 'user_count'" class="table_hight_light" @click="wakeUpUserListModal(record)">{{
-          record.user_count
-        }}</span>
+        }}</a-tag>
         <div v-if="column.dataIndex === 'operation'" class="table_operation">
           <span v-if="record.status === 'pending'" @click="wakeUpHandleApproveModal(record)">审核</span>
+          <span v-if="record.status !== 'pending'" @click="handleDelete(record)">删除</span>
         </div>
       </template>
     </a-table>
     <HandleApproveModal ref="handleApproveModalRef" @success="getList" />
-    <UserListModal ref="userListModalRef" />
   </div>
 </template>
 <script setup>
-import { createVNode, onMounted, reactive, ref } from 'vue';
-import { Modal, message } from 'ant-design-vue';
+import { onMounted, reactive, ref, nextTick, createVNode } from 'vue';
+import { message, Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { COLUMNS } from './columns';
 import { STATUSMAP, STATUSCOLORMAP } from './const';
-import { getwithdrawlist, putagentcommission } from './api';
-import UserListModal from './UserListModal.vue';
+import { getwithdrawlist,deletewithdraw } from './api';
 import HandleApproveModal from './HandleApproveModal.vue';
 
 onMounted(() => {
   getList()
 })
 
-const userListModalRef = ref()
 const handleApproveModalRef = ref()
 const loading = ref(false)
 const formState = ref({})
@@ -105,24 +91,6 @@ const wakeUpHandleApproveModal = (record) => {
   handleApproveModalRef.value.getEchoInfo(record)
 }
 /**
- * 编辑分润比例
-*/
-const editCommissionRate = record => {
-  const { user, commission_rate } = record || {}
-  const { nickname } = user || {}
-  Modal.confirm({
-    title: '提示',
-    icon: () => createVNode(ExclamationCircleOutlined),
-    content: `确认将代理${nickname}的分润比例改为${commission_rate}%吗？`,
-    onOk: async () => {
-      await putagentcommission(record);
-      selectedRowKeys.value = [];
-      message.success(`修改代理${nickname}分润比例为${commission_rate}%成功`)
-      getList();
-    }
-  });
-}
-/**
  * 获取列表
  */
 const getList = async () => {
@@ -140,12 +108,6 @@ const getList = async () => {
   loading.value = false
 }
 /**
- * 唤醒新增/修改项目弹窗
- */
-const wakeUpUserListModal = record => {
-  userListModalRef.value.getEchoInfo(record)
-}
-/**
  * 筛选
  */
 const search = () => {
@@ -159,6 +121,23 @@ const search = () => {
 const reset = () => {
   formState.value = {}
   search()
+}
+/**
+ * 删除数据
+*/
+const handleDelete = (record) => {
+  const { id } = record || {}
+  Modal.confirm({
+    title: '提示',
+    icon: () => createVNode(ExclamationCircleOutlined),
+    content: '确认删除该提现记录吗？',
+    onOk: async () => {
+      await deletewithdraw(id);
+      message.success('提现记录删除成功')
+      selectedRowKeys.value = [];
+      getList();
+    }
+  });
 }
 </script>
 <style lang="less" scoped>

@@ -1,7 +1,8 @@
 import { instance } from "@/request/request";
 export const apiMap = {
   product: '/product',
-  productlist: '/product/list'
+  productlist: '/product/list',
+  producttoggle:'/product/toggle'
 }
 /**
  * 获取列表
@@ -20,6 +21,12 @@ export const postproduct = (payload) => {
  */
 export const putproduct = (payload) => {
   return instance.put(apiMap.product, payload)
+}
+/**
+ * 启用产品
+ */
+export const putproducttoggle = (payload) => {
+  return instance.put(`${apiMap.producttoggle}/${payload}`)
 }
 
 /**

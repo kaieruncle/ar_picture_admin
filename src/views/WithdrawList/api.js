@@ -1,11 +1,9 @@
 import { instance } from "@/request/request";
 
 export const apiMap = {
-    agentusers: '/agent/users',
+    withdraw: 'withdraw',
     withdrawlist: '/withdraw/list',
-    agentwithdrawlist: '/agent/withdrawlist',
-    agentapprove: '/agent/approve',
-    agentcommission: '/agent/commission'
+    withdrawapprove: '/withdraw/approve'
 }
 /**
  * 获取列表
@@ -14,27 +12,14 @@ export const getwithdrawlist = (payload) => {
     return instance.get(apiMap.withdrawlist, { payload });
 }
 /**
- * 获取客户列表
+ * 审批提现
  */
-export const getagentusers = (payload) => {
-    return instance.get(apiMap.agentusers, { payload });
+export const putwithdrawapprove = (payload) => {
+    return instance.put(apiMap.withdrawapprove, payload);
 }
 /**
- * 获取提现列表
+ * 删除提现记录
  */
-export const getagentwithdrawlist = (payload) => {
-    return instance.get(apiMap.agentwithdrawlist, { payload });
-}
-/**
- * 审核代理申请
- */
-export const putagentapprove = (payload) => {
-    return instance.put(apiMap.agentapprove, payload);
-}
-
-/**
- * 修改代理点位
- */
-export const putagentcommission = (payload) => {
-    return instance.put(apiMap.agentcommission, payload);
+export const deletewithdraw = (payload) => {
+    return instance.delete(`${apiMap.withdraw}/${payload}`);
 }

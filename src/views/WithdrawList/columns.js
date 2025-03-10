@@ -5,83 +5,62 @@ export const COLUMNS = [{
     width: 80,
     fixed: 'left',
 }, {
-    title: '昵称',
-    dataIndex: 'user.nickname',
-    align: 'center',
-    width: 120,
-    ellipsis: true,
-    customRender: ({ record }) => {
-        const { user } = record || {}
-        const { nickname } = user || {}
-        return nickname;
-    },
-}, {
     title: '状态',
     dataIndex: 'status',
     align: 'center',
     width: 100,
     ellipsis: true
 }, {
+    title: '提现金额',
+    dataIndex: 'amount',
+    align: 'center',
+    width: 100,
+    ellipsis: true
+}, {
+    title: '所属代理',
+    dataIndex: 'agent.user.nickname',
+    align: 'center',
+    width: 120,
+    ellipsis: true,
+    customRender: ({ record }) => {
+        const { agent } = record || {}
+        const { user } = agent || {}
+        const { nickname } = user || {}
+        return nickname;
+    },
+}, {
     title: '联系人',
-    dataIndex: 'contact_name',
-    align: 'center',
-    width: 100,
-    ellipsis: true
-}, {
-    title: '手机号',
-    dataIndex: 'contact_phone',
-    align: 'center',
-    width: 100,
-    ellipsis: true
-}, {
-    title: '微信',
-    dataIndex: 'wechat',
-    align: 'center',
-    width: 100,
-    ellipsis: true
-}, {
-    title: '分润比例',
-    dataIndex: 'commission_rate',
+    dataIndex: 'agent.contact_name',
     align: 'center',
     width: 100,
     ellipsis: true,
     customRender: ({ record }) => {
-        const { commission_rate } = record || {}
-        return commission_rate || '-';
-    },
+        const { agent } = record || {}
+        const { contact_name } = agent || {}
+        return contact_name;
+    }
 }, {
-    title: "钱包",
-    children: [{
-        title: '待提现',
-        dataIndex: 'pending_amount',
-        align: 'center',
-        width: 100,
-        ellipsis: true
-    }, {
-        title: '申请中',
-        dataIndex: 'reviewing_amount',
-        align: 'center',
-        width: 100,
-        ellipsis: true
-    }, {
-        title: '已打款',
-        dataIndex: 'withdrawn_amount',
-        align: 'center',
-        width: 100,
-        ellipsis: true
-    }]
-}, {
-    title: '代理码',
-    dataIndex: 'qrcode_url',
+    title: '手机号',
+    dataIndex: 'agent.contact_phone',
     align: 'center',
     width: 100,
-    ellipsis: true
+    ellipsis: true,
+    customRender: ({ record }) => {
+        const { agent } = record || {}
+        const { contact_phone } = agent || {}
+        return contact_phone;
+    }
 }, {
-    title: '客户数量',
-    dataIndex: 'user_count',
+    title: '微信',
+    dataIndex: 'agent.wechat',
     align: 'center',
     width: 100,
-    ellipsis: true
+    ellipsis: true,
+    customRender: ({ record }) => {
+        const { agent } = record || {}
+        const { wechat } = agent || {}
+        return wechat;
+    }
 }]
 export const USERLISTCOLUMNS = [{
     title: '头像',

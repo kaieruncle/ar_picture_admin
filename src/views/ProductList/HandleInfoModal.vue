@@ -12,35 +12,19 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="stock" label="库存">
-                        <a-input-number class="form_item_full" v-model:value="formState.stock" placeholder="请填写库存" />
+                    <a-form-item name="sort" label="排序">
+                        <a-input-number class="form_item_full" v-model:value="formState.sort" placeholder="请填写排序" />
                     </a-form-item>
                 </a-col>
             </a-row>
-            <a-form-item name="sort" label="排序">
-                <a-input-number class="form_item_full" v-model:value="formState.sort" placeholder="请填写排序" />
-            </a-form-item>
-            <a-form-item required name="images" label="商品图片">
-                <a-upload accept="image/*" v-model:file-list="formState.images" list-type="picture-card"
-                    :before-upload="beforeUpload" @change="getUploadResult">
-                    <UploadOutlined />
-                </a-upload>
-            </a-form-item>
         </a-form>
     </a-modal>
 </template>
 <script setup>
-import { ref, nextTick } from "vue";
-import { useRoute } from "vue-router";
+import { ref } from "vue";
 import { message } from 'ant-design-vue';
-import { DeleteOutlined, UploadOutlined, ExclamationCircleOutlined } from '@ant-design/icons-vue';
-import { postfileupload } from '@/request/commonApi';
 import { postproduct, putproduct } from './api';
 const emit = defineEmits(['success'])
-const categoryList = ref([])
-const route = useRoute()
-const fileList = ref([])
-const editorRef = ref()
 const open = ref(false)
 const formState = ref({})
 const formRef = ref()
@@ -49,53 +33,16 @@ const formRef = ref()
  */
 const getEchoInfo = async (record) => {
     formState.value = JSON.parse(JSON.stringify(record || {}))
-    getCategoryList()
     open.value = true
-}
-/**
- * 阻止默认上传
- */
-const beforeUpload = file => {
-    return false;
-};
-/**
- * 获取上传结果
- */
-const getUploadResult = async ({ file, fileList }) => {
-    const { status } = file || {}
-    if (!status) {
-        const formData = new FormData();
-        formData.append('file', file);
-        const { url } = await postfileupload(formData)
-        fileList[fileList.length - 1].url = url
-    }
-    formRef.value.validateFields(['images'])
-}
-/**
- * 获取分类列表
-*/
-const getCategoryList = async () => {
-    const newList = await getproductcategorylist()
-    categoryList.value = newList || []
 }
 /**
  * 提交表单
  */
 const submitForm = async () => {
-    const { id, images } = formState.value || {}
+    const { id } = formState.value || {}
     await formRef.value.validate();
-    const filterImages = images.map((v, sort) => {
-        const { url, uid } = v || {}
-        return {
-            sort,
-            url,
-            uid
-        }
-    })
-    const payload = JSON.parse(JSON.stringify(formState.value || {}))
-    payload.images = filterImages || []
-    if (!id) await postproduct(payload)
-    if (id) await putproduct(payload)
+    if (!id) await postproduct(formState.value)
+    if (id) await putproduct(formState.value)
     message.success(`${id ? '编辑' : '添加'}商品成功`)
     open.value = false
     emit('success')

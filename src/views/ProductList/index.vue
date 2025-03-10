@@ -29,8 +29,8 @@
         </a-tooltip>
       </template>
       <template #bodyCell="{ column, record }">
-        <a-switch v-if="column.dataIndex === 'is_starred'" v-model:checked="record.is_starred" checked-children="是"
-          un-checked-children="否" @change="toogleIsStarred(record)" />
+        <a-switch v-if="column.dataIndex === 'enabled'" v-model:checked="record.enabled" checked-children="是"
+          un-checked-children="否" @change="enabledProduct(record)" />
         <div v-if="column.dataIndex === 'operation'" class="table_operation">
           <span @click="wakeUpHandleInfoModal(record)">编辑</span>
           <span @click="handleDelete(record)">删除</span>
@@ -47,7 +47,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { useRouter } from 'vue-router';
 import { COLUMNS } from './columns';
 import { getdictoptions } from '@/request/commonApi'
-import { getproductlist } from './api';
+import { getproductlist, deleteproduct,putproducttoggle } from './api';
 import HandleInfoModal from './HandleInfoModal.vue';
 
 onMounted(() => {
@@ -80,15 +80,13 @@ const getList = async () => {
   loading.value = false
 }
 /**
- * 切换星标
+ * 启用商品
 */
-const toogleIsStarred = async (record) => {
-  const { id, is_starred, title } = record || {}
-  await putarticlesuggest({
-    id,
-    is_starred
-  })
-  message.success(`${is_starred ? '推荐' : '取消推荐'}文章${title}成功`)
+const enabledProduct = async (record) => {
+  const { id, title } = record || {}
+  await putproducttoggle(id)
+  message.success(`启用商品${title}成功`)
+  getList()
 }
 /**
  * 筛选
@@ -119,7 +117,7 @@ const handleDelete = (record) => {
     icon: () => createVNode(ExclamationCircleOutlined),
     content: `确认删除文章${title}吗？`,
     onOk: async () => {
-      await deletearticle(id);
+      await deleteproduct(id);
       message.success(`删除文章${title}成功`)
       selectedRowKeys.value = [];
       getList();

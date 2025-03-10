@@ -2,7 +2,7 @@ export const COLUMNS = [{
     title: '操作',
     dataIndex: 'operation',
     align: 'center',
-    width: 100,
+    width: 80,
     fixed: 'left',
 },
 {
@@ -31,7 +31,7 @@ export const COLUMNS = [{
     align: 'center',
     width: 80
 }, {
-    title: '相框',
+    title: '产品名称',
     dataIndex: 'product.title',
     align: 'center',
     width: 120,
