@@ -12,3 +12,11 @@ export const STATUSCOLORMAP = {
     'completed': 'green',
     'closed': 'default'
 }
+export const DELIVERYTYPEMAP = {
+    'pickup': '自提',
+    'express': '到付',
+}
+export const DELIVERYTYPECOLORMAP = {
+    'pickup': 'green',
+    'express': 'red'
+}

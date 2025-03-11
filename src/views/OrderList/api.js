@@ -4,13 +4,20 @@ export const apiMap = {
     pay: '/pay',
     paylist: '/pay/list',
     payship: '/pay/ship',
-    payqrcode: '/pay/qrcode'
+    payqrcode: '/pay/qrcode',
+    paydelivery: '/pay/delivery'
 }
 /**
  * 获取列表
  */
 export const getpaylist = (payload) => {
     return instance.get(apiMap.paylist, { payload })
+}
+/**
+ * 获取物流公司列表
+ */
+export const getpaydelivery = (payload) => {
+    return instance.get(apiMap.paydelivery, { payload })
 }
 /**
  * 刷新入口码

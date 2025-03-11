@@ -29,6 +29,13 @@
       </template>
       <template #bodyCell="{ column, record }">
         <a-tag v-if="column.dataIndex === 'status'" :color="statusColorMap[record.status]">{{ statusMap[record.status]
+        }}</a-tag>
+        <a-tag v-if="column.dataIndex === 'delivery_type'" :color="deliveryTypeColorMap[record.delivery_type]">{{
+          deliveryTypeMap[record.delivery_type]
+        }}</a-tag>
+        <a-tag v-if="column.dataIndex === 'is_shipping_info_uploaded'"
+          :color="record.delivery_type ? 'green' : 'default'">{{
+            record.delivery_type ? '已发货' : '未发货'
           }}</a-tag>
         <a-image v-if="column.dataIndex === 'photo_url'" :width="60" :height="60" :src="record.photo_url"></a-image>
         <a-image v-if="column.dataIndex === 'ew_code_url'" :width="60" :height="60" :src="record.ew_code_url"></a-image>
@@ -48,7 +55,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { message, Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { COLUMNS } from './columns';
-import { STATUSMAP, STATUSCOLORMAP } from './const';
+import { STATUSMAP, STATUSCOLORMAP, DELIVERYTYPEMAP, DELIVERYTYPECOLORMAP } from './const';
 import { getpaylist, deletepay, putpayqrcode } from './api';
 import SendModal from './SendModal.vue';
 
@@ -61,6 +68,8 @@ const router = useRouter()
 const sendModalRef = ref()
 const statusMap = ref(STATUSMAP)
 const statusColorMap = ref(STATUSCOLORMAP)
+const deliveryTypeMap = ref(DELIVERYTYPEMAP)
+const deliveryTypeColorMap = ref(DELIVERYTYPECOLORMAP)
 const handleInfoModalRef = ref()
 const loading = ref(false)
 const formState = ref({})
