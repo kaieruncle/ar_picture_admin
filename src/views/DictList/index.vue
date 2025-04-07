@@ -77,13 +77,6 @@ import HandleInfoDrawer from './HandleInfoDrawer.vue';
 onMounted(() => {
   getList()
 })
-const route = useRoute()
-const projectSearchParam = ref({})
-const projectList = ref([])
-const userList = ref([])
-const userSearchParam = ref({})
-const authorList = ref([])
-const authorSearchParam = ref({})
 const handleInfoDrawerRef = ref()
 const loading = ref(false)
 const formState = ref({})

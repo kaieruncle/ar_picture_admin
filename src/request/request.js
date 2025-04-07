@@ -31,6 +31,7 @@ instance.interceptors.response.use(
         const { code, msg, data } = res || {}
         switch (code) {
             case 200:
+            case 201:
                 return data
                 break;
             default:
@@ -41,8 +42,8 @@ instance.interceptors.response.use(
     },
     error => {
         const { response } = error || {}
-        const {data} = response || {}
-        const {code,msg} = data || {}
+        const { data } = response || {}
+        const { code, msg } = data || {}
         switch (code) {
             case 401:
             case 402:

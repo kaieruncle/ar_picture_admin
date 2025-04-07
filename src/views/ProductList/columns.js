@@ -11,11 +11,6 @@ export const COLUMNS = [
         dataIndex: 'title',
         align: 'center',
         width: 100
-    },{
-        title: '是否启用',
-        dataIndex: 'enabled',
-        align: 'center',
-        width: 100
     },
     {
         title: '价格',
