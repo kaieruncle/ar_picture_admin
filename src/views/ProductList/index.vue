@@ -29,8 +29,6 @@
         </a-tooltip>
       </template>
       <template #bodyCell="{ column, record }">
-        <a-switch v-if="column.dataIndex === 'enabled'" v-model:checked="record.enabled" checked-children="是"
-          un-checked-children="否" @change="enabledProduct(record)" />
         <div v-if="column.dataIndex === 'operation'" class="table_operation">
           <span @click="wakeUpHandleInfoModal(record)">编辑</span>
           <span @click="handleDelete(record)">删除</span>
@@ -46,8 +44,7 @@ import { message, Modal } from 'ant-design-vue';
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
 import { useRouter } from 'vue-router';
 import { COLUMNS } from './columns';
-import { getdictoptions } from '@/request/commonApi'
-import { getproductlist, deleteproduct,putproducttoggle } from './api';
+import { getproductlist, deleteproduct } from './api';
 import HandleInfoModal from './HandleInfoModal.vue';
 
 onMounted(() => {
@@ -78,15 +75,6 @@ const getList = async () => {
   const newList = await getproductlist(payload)
   list.value = newList || []
   loading.value = false
-}
-/**
- * 启用商品
-*/
-const enabledProduct = async (record) => {
-  const { id, title } = record || {}
-  await putproducttoggle(id)
-  message.success(`启用商品${title}成功`)
-  getList()
 }
 /**
  * 筛选

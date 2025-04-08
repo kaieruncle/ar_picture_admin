@@ -22,12 +22,6 @@ export const postproduct = (payload) => {
 export const putproduct = (payload) => {
   return instance.put(apiMap.product, payload)
 }
-/**
- * 启用产品
- */
-export const putproducttoggle = (payload) => {
-  return instance.put(`${apiMap.producttoggle}/${payload}`)
-}
 
 /**
  * 删除产品
