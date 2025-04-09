@@ -17,26 +17,9 @@
                     </a-form-item>
                 </a-col>
             </a-row>
-            <a-row wrap :gutter="{ xs: 8, sm: 16, md: 24 }">
-                <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="width" label="宽度">
-                        <a-input-number class="form_item_full" v-model:value="formState.width" placeholder="请填写宽度">
-                            <template #addonAfter>
-                                <span>px</span>
-                            </template>
-                        </a-input-number>
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="16" :md="12">
-                    <a-form-item required name="height" label="高度">
-                        <a-input-number class="form_item_full" v-model:value="formState.height" placeholder="请填写高度">
-                            <template #addonAfter>
-                                <span>px</span>
-                            </template>
-                        </a-input-number>
-                    </a-form-item>
-                </a-col>
-            </a-row>
+            <a-form-item required name="ratio" label="裁剪比例">
+                <a-input class="form_item_full" v-model:value="formState.ratio" placeholder="请填写裁剪比例" />
+            </a-form-item>
             <a-form-item name="remark" label="商品描述">
                 <a-textarea v-model:value="formState.remark" placeholder="请输入商品描述" />
             </a-form-item>
